@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freakin.pk | Stickers & Jewelry</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Styles to match the Vibe */
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #fff5f9; /* Very light pink background */
+        }
+        
+        h1, h2, h3, h4, h5, h6, .logo-font {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        /* Bubbly Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fce7f3;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f472b6;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ec4899;
+        }
+
+        /* Bubble Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Glossy Button Effect */
+        .glossy-btn {
+            background: linear-gradient(180deg, #f472b6 0%, #db2777 100%);
+            box-shadow: 0 4px 0 #9d174d, 0 5px 10px rgba(0,0,0,0.1);
+            transition: all 0.1s ease;
+        }
+        .glossy-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 #9d174d, inset 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .text-shadow-pop {
+            text-shadow: 2px 2px 0px #fff, 4px 4px 0px #f9a8d4;
+        }
+
+        /* Animations */
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.2s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        
+        // Icons from Lucide
+        const { ShoppingBag, Search, Heart, Menu, X, Star, Zap, Sticker, Gem } = lucide;
+
+        // --- MOCK DATA ---
+        const CATEGORIES = [
+            { id: 1, name: "Cute Stickers", icon: <Sticker size={24}/>, color: "bg-yellow-100 text-yellow-600" },
+            { id: 2, name: "Trendy Jewelry", icon: <Gem size={24}/>, color: "bg-purple-100 text-purple-600" },
+            { id: 3, name: "Phone Charms", icon: <Heart size={24}/>, color: "bg-pink-100 text-pink-600" },
+            { id: 4, name: "Best Sellers", icon: <Zap size={24}/>, color: "bg-blue-100 text-blue-600" },
+        ];
+
+        const PRODUCTS = [
+            {
+                id: 1,
+                name: "Chunky Resin Rings",
+                price: 450,
+                category: "Jewelry",
+                image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=500",
+                badge: "Hot"
+            },
+            {
+                id: 2,
+                name: "Holographic Space Cats",
+                price: 150,
+                category: "Stickers",
+                image: "https://images.unsplash.com/photo-1572375992501-4b0892d50c69?auto=format&fit=crop&q=80&w=500",
+                badge: "New"
+            },
+            {
+                id: 3,
+                name: "Y2K Butterfly Necklace",
+                price: 850,
+                category: "Jewelry",
+                image: "https://images.unsplash.com/photo-1599643478518-17488fbbcd75?auto=format&fit=crop&q=80&w=500",
+                badge: null
+            },
+            {
+                id: 4,
+                name: "Positive Vibes Pack",
+                price: 300,
+                category: "Stickers",
+                image: "https://images.unsplash.com/photo-1531303915293-6532689931f4?auto=format&fit=crop&q=80&w=500",
+                badge: "Sale"
+            },
+             {
+                id: 5,
+                name: "Pearl Beaded Bracelet",
+                price: 550,
+                category: "Jewelry",
+                image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=500",
+                badge: null
+            },
+            {
+                id: 6,
+                name: "Retro Laptop Decals",
+                price: 200,
+                category: "Stickers",
+                image: "https://images.unsplash.com/photo-1589384267710-7a170981ca78?auto=format&fit=crop&q=80&w=500",
+                badge: null
+            }
+        ];
+
+        // --- COMPONENTS ---
+
+        const Navbar = ({ cartCount }) => {
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+            return (
+                <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b-4 border-pink-200">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="flex justify-between items-center h-20">
+                            {/* Mobile Menu Button */}
+                            <div className="flex items-center md:hidden">
+                                <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-pink-500 p-2 rounded-full hover:bg-pink-50">
+                                    {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                                </button>
+                            </div>
+
+                            {/* Logo - Using text simulation of the user's image */}
+                            <div className="flex-shrink-0 flex items-center justify-center flex-1 md:justify-start">
+                                <a href="#" className="logo-font text-3xl md:text-4xl font-bold text-pink-500 tracking-tight" style={{ textShadow: '2px 2px 0px #fff, 3px 3px 0px #fecdd3, 4px 4px 0px #f472b6' }}>
+                                    Freakin<span className="text-pink-600">.pk</span>
+                                </a>
+                            </div>
+
+                            {/* Desktop Nav */}
+                            <div className="hidden md:flex space-x-8 items-center">
+                                <a href="#" className="text-gray-600 hover:text-pink-500 font-bold text-lg transition">Home</a>
+                                <a href="#shop" className="text-gray-600 hover:text-pink-500 font-bold text-lg transition">Stickers</a>
+                                <a href="#jewelry" className="text-gray-600 hover:text-pink-500 font-bold text-lg transition">Jewelry</a>
+                                <a href="#about" className="text-gray-600 hover:text-pink-500 font-bold text-lg transition">About</a>
+                            </div>
+
+                            {/* Icons */}
+                            <div className="flex items-center space-x-2 md:space-x-4">
+                                <button className="p-2 text-gray-500 hover:text-pink-500 transition rounded-full hover:bg-pink-50 hidden sm:block">
+                                    <Search size={24} />
+                                </button>
+                                <button className="p-2 text-gray-500 hover:text-pink-500 transition rounded-full hover:bg-pink-50 relative">
+                                    <Heart size={24} />
+                                </button>
+                                <button className="p-2 text-pink-600 bg-pink-100 rounded-full hover:bg-pink-200 transition relative glossy-btn border-none text-white">
+                                    <ShoppingBag size={24} />
+                                    <span className="absolute -top-1 -right-1 bg-yellow-400 text-pink-900 text-xs font-bold h-5 w-5 flex items-center justify-center rounded-full border-2 border-white">
+                                        {cartCount}
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Mobile Menu */}
+                    {isMenuOpen && (
+                        <div className="md:hidden bg-white border-b border-pink-100 animate-fade-in">
+                            <div className="px-4 pt-2 pb-4 space-y-1">
+                                <a href="#" className="block px-3 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-pink-600 hover:bg-pink-50">Home</a>
+                                <a href="#" className="block px-3 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-pink-600 hover:bg-pink-50">Shop Stickers</a>
+                                <a href="#" className="block px-3 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-pink-600 hover:bg-pink-50">Shop Jewelry</a>
+                                <a href="#" className="block px-3 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-pink-600 hover:bg-pink-50">Track Order</a>
+                            </div>
+                        </div>
+                    )}
+                </nav>
+            );
+        };
+
+        const Hero = () => {
+            return (
+                <div className="relative bg-pink-50 overflow-hidden">
+                    {/* Decorative Blobs */}
+                    <div className="absolute top-0 left-0 w-64 h-64 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+                    
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 flex flex-col md:flex-row items-center">
+                        <div className="md:w-1/2 z-10 text-center md:text-left">
+                            <span className="inline-block px-4 py-2 rounded-full bg-yellow-200 text-yellow-800 font-bold text-sm mb-6 transform -rotate-2">
+                                ✨ New Collection Drop!
+                            </span>
+                            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 leading-tight mb-6">
+                                Stick it. <br/>
+                                <span className="text-pink-500 text-shadow-pop">Wear it.</span> <br/>
+                                Love it.
+                            </h1>
+                            <p className="text-lg text-gray-600 mb-8 max-w-md mx-auto md:mx-0 font-medium">
+                                The cutest stickers and trendy jewelry delivered to your doorstep in Pakistan.
+                            </p>
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                                <button className="glossy-btn text-white font-bold py-4 px-8 rounded-2xl text-lg transform transition hover:-translate-y-1">
+                                    Shop Stickers
+                                </button>
+                                <button className="bg-white border-2 border-pink-200 text-pink-500 font-bold py-4 px-8 rounded-2xl text-lg hover:bg-pink-50 transform transition hover:-translate-y-1">
+                                    Shop Jewelry
+                                </button>
+                            </div>
+                        </div>
+                        <div className="md:w-1/2 mt-12 md:mt-0 relative">
+                            {/* Mockup of product layout */}
+                            <div className="relative w-full h-80 md:h-96">
+                                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white p-4 rounded-3xl shadow-xl rotate-6 animate-float z-10 border-4 border-pink-100">
+                                    <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=500" className="w-full h-full object-cover rounded-2xl" alt="Jewelry" />
+                                    <div className="absolute -bottom-4 -right-4 bg-yellow-300 text-yellow-900 font-bold px-4 py-2 rounded-full shadow-lg">Rs. 450</div>
+                                </div>
+                                <div className="absolute top-1/2 left-1/2 transform -translate-x-3/4 -translate-y-3/4 w-48 h-48 bg-white p-3 rounded-3xl shadow-xl -rotate-6 z-0 border-4 border-purple-100">
+                                    <img src="https://images.unsplash.com/photo-1572375992501-4b0892d50c69?auto=format&fit=crop&q=80&w=500" className="w-full h-full object-cover rounded-2xl" alt="Stickers" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const CategoryPills = () => {
+            return (
+                <div className="py-10 bg-white">
+                    <div className="max-w-7xl mx-auto px-4">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            {CATEGORIES.map((cat) => (
+                                <div key={cat.id} className={`${cat.color} p-6 rounded-3xl cursor-pointer transform transition hover:scale-105 hover:shadow-lg flex flex-col items-center justify-center text-center gap-3`}>
+                                    <div className="bg-white/50 p-3 rounded-full backdrop-blur-sm">
+                                        {cat.icon}
+                                    </div>
+                                    <h3 className="font-bold text-lg">{cat.name}</h3>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const ProductCard = ({ product, addToCart }) => {
+            return (
+                <div className="group relative bg-white rounded-3xl border-2 border-pink-50 hover:border-pink-300 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                    {product.badge && (
+                        <div className="absolute top-4 left-4 z-10 bg-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                            {product.badge}
+                        </div>
+                    )}
+                    <button className="absolute top-4 right-4 z-10 bg-white/80 p-2 rounded-full text-gray-400 hover:text-red-500 transition backdrop-blur-sm opacity-0 group-hover:opacity-100">
+                        <Heart size={18} />
+                    </button>
+                    
+                    <div className="h-64 overflow-hidden bg-gray-100 relative">
+                        <img src={product.image} alt={product.name} className="w-full h-full object-cover transform group-hover:scale-110 transition duration-500" />
+                        <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition"></div>
+                    </div>
+                    
+                    <div className="p-5">
+                        <p className="text-xs font-bold text-pink-400 uppercase tracking-wide mb-1">{product.category}</p>
+                        <h3 className="font-bold text-gray-900 text-lg mb-2 truncate">{product.name}</h3>
+                        <div className="flex items-center justify-between">
+                            <span className="text-xl font-bold text-gray-800">Rs. {product.price}</span>
+                            <button 
+                                onClick={() => addToCart(product)}
+                                className="bg-pink-100 text-pink-600 hover:bg-pink-500 hover:text-white p-2 rounded-xl transition-colors"
+                            >
+                                <ShoppingBag size={20} />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const Newsletter = () => {
+            return (
+                <div className="py-16 px-4">
+                    <div className="max-w-5xl mx-auto bg-purple-600 rounded-[3rem] p-8 md:p-12 text-center text-white relative overflow-hidden">
+                        <div className="relative z-10">
+                            <h2 className="text-3xl md:text-5xl font-bold mb-4">Join the Freakin' Club! 💌</h2>
+                            <p className="text-purple-100 text-lg mb-8 max-w-xl mx-auto">Get 10% off your first order, exclusive sticker drops, and fun updates!</p>
+                            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                                <input 
+                                    type="email" 
+                                    placeholder="your@email.com" 
+                                    className="flex-1 px-6 py-4 rounded-2xl text-gray-900 focus:outline-none focus:ring-4 focus:ring-purple-400"
+                                />
+                                <button className="bg-yellow-400 text-purple-900 font-bold px-8 py-4 rounded-2xl hover:bg-yellow-300 transition shadow-lg">
+                                    Subscribe
+                                </button>
+                            </div>
+                        </div>
+                        {/* Background patterns */}
+                        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                            <div className="absolute top-10 left-10 transform rotate-12"><Sticker size={64}/></div>
+                            <div className="absolute bottom-10 right-10 transform -rotate-12"><Gem size={64}/></div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const Footer = () => {
+            return (
+                <footer className="bg-white pt-16 pb-8 border-t border-pink-100">
+                    <div className="max-w-7xl mx-auto px-4">
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                            <div className="col-span-1 md:col-span-1">
+                                <h2 className="logo-font text-3xl font-bold text-pink-500 mb-4">Freakin.pk</h2>
+                                <p className="text-gray-500 mb-6">
+                                    Bringing joy to your life through cute stickers and trendy accessories. Made with ❤️ in Pakistan.
+                                </p>
+                                <div className="flex space-x-4">
+                                    {/* Social placeholders */}
+                                    <div className="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center text-pink-500 hover:bg-pink-500 hover:text-white transition cursor-pointer">IG</div>
+                                    <div className="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center text-pink-500 hover:bg-pink-500 hover:text-white transition cursor-pointer">FB</div>
+                                    <div className="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center text-pink-500 hover:bg-pink-500 hover:text-white transition cursor-pointer">TT</div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 className="font-bold text-gray-900 mb-4 text-lg">Shop</h4>
+                                <ul className="space-y-3 text-gray-500">
+                                    <li><a href="#" className="hover:text-pink-500">All Products</a></li>
+                                    <li><a href="#" className="hover:text-pink-500">New Arrivals</a></li>
+                                    <li><a href="#" className="hover:text-pink-500">Sticker Packs</a></li>
+                                    <li><a href="#" className="hover:text-pink-500">Jewelry</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 className="font-bold text-gray-900 mb-4 text-lg">Help</h4>
+                                <ul className="space-y-3 text-gray-500">
+                                    <li><a href="#" className="hover:text-pink-500">Shipping Info</a></li>
+                                    <li><a href="#" className="hover:text-pink-500">Returns</a></li>
+                                    <li><a href="#" className="hover:text-pink-500">Track Order</a></li>
+                                    <li><a href="#" className="hover:text-pink-500">Contact Us</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 className="font-bold text-gray-900 mb-4 text-lg">Contact</h4>
+                                <ul className="space-y-3 text-gray-500">
+                                    <li>hello@freakin.pk</li>
+                                    <li>Lahore, Pakistan</li>
+                                    <li className="text-sm bg-green-100 text-green-700 inline-block px-2 py-1 rounded-lg">WhatsApp Available</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="border-t border-gray-100 pt-8 text-center text-gray-400 text-sm">
+                            &copy; 2025 Freakin.pk. All rights reserved.
+                        </div>
+                    </div>
+                </footer>
+            );
+        }
+
+        // --- MAIN APP ---
+        const App = () => {
+            const [cart, setCart] = useState([]);
+            const [activeTab, setActiveTab] = useState('all');
+
+            const addToCart = (product) => {
+                setCart([...cart, product]);
+                // Optional: Add toast notification here
+            };
+
+            const filteredProducts = activeTab === 'all' 
+                ? PRODUCTS 
+                : PRODUCTS.filter(p => p.category.toLowerCase() === activeTab);
+
+            return (
+                <div className="min-h-screen flex flex-col">
+                    <Navbar cartCount={cart.length} />
+                    
+                    <main className="flex-grow">
+                        <Hero />
+                        <CategoryPills />
+
+                        <section id="shop" className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="text-center mb-12">
+                                <h2 className="text-4xl font-bold text-gray-900 mb-4">Trending Now</h2>
+                                <div className="flex justify-center space-x-4">
+                                    <button 
+                                        onClick={() => setActiveTab('all')}
+                                        className={`px-6 py-2 rounded-full font-bold transition ${activeTab === 'all' ? 'bg-pink-500 text-white shadow-lg' : 'bg-white text-gray-500 hover:bg-pink-50'}`}
+                                    >
+                                        All
+                                    </button>
+                                    <button 
+                                        onClick={() => setActiveTab('stickers')}
+                                        className={`px-6 py-2 rounded-full font-bold transition ${activeTab === 'stickers' ? 'bg-pink-500 text-white shadow-lg' : 'bg-white text-gray-500 hover:bg-pink-50'}`}
+                                    >
+                                        Stickers
+                                    </button>
+                                    <button 
+                                        onClick={() => setActiveTab('jewelry')}
+                                        className={`px-6 py-2 rounded-full font-bold transition ${activeTab === 'jewelry' ? 'bg-pink-500 text-white shadow-lg' : 'bg-white text-gray-500 hover:bg-pink-50'}`}
+                                    >
+                                        Jewelry
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {filteredProducts.map(product => (
+                                    <ProductCard key={product.id} product={product} addToCart={addToCart} />
+                                ))}
+                            </div>
+                            
+                            <div className="mt-16 text-center">
+                                <button className="border-2 border-gray-900 text-gray-900 font-bold py-3 px-10 rounded-2xl hover:bg-gray-900 hover:text-white transition uppercase tracking-wider">
+                                    View All Products
+                                </button>
+                            </div>
+                        </section>
+
+                        <Newsletter />
+                    </main>
+
+                    <Footer />
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
