@@ -1,8 +1,7 @@
 "use client";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
-import { useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRef, useState, useTransition } from "react";
 
 // Video extension check
 const VIDEO_EXTENSIONS = [".mp4", ".webm", ".ogg", ".ogv", ".mov", ".m4v"];
@@ -14,8 +13,9 @@ const isVideoUrl = (url = "") => {
 export default function Categories({ categories = [] }) {
   if (!categories.length) return null;
   const ref = useRef(null);
-  const router = useRouter();
   const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const [loadingCategoryId, setLoadingCategoryId] = useState(null);
+  const [isPending, startTransition] = useTransition();
 
   return (
     <section className="w-full bg-[#fff5f9] py-14 md:py-20">
@@ -34,17 +34,27 @@ export default function Categories({ categories = [] }) {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
         >
           {categories.slice(0, 6).map((c, i) => (
-              <motion.div
+              <Link
                 key={c.id ?? i}
-                initial={{ opacity: 0, y: 14 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.35, delay: i * 0.05 }}
-                className="relative rounded-3xl overflow-hidden bg-white border-4 border-pink-100 shadow-lg hover:shadow-xl hover:border-pink-300 transition-all duration-300 group cursor-pointer"
+                href={`/categories/${c.id}`}
+                prefetch={true}
                 onClick={(e) => {
-                  e.stopPropagation();
-                  router.push(`/categories/${c.id}`);
+                  // Prevent multiple clicks while loading
+                  if (loadingCategoryId) {
+                    e.preventDefault();
+                    return;
+                  }
+                  startTransition(() => {
+                    setLoadingCategoryId(c.id);
+                  });
                 }}
               >
+                <motion.div
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.35, delay: i * 0.05 }}
+                  className={`relative rounded-3xl overflow-hidden bg-white border-4 border-pink-100 shadow-lg hover:shadow-xl hover:border-pink-300 transition-all duration-300 group ${loadingCategoryId ? 'cursor-wait' : 'cursor-pointer'}`}
+                >
                 <div className="overflow-hidden h-[220px] md:h-[280px]">
                     {isVideoUrl(c.imageURL) ? (
                     <video
@@ -64,11 +74,22 @@ export default function Categories({ categories = [] }) {
                     />
                     )}
                 </div>
-                
+
+                {/* Loading Overlay */}
+                {loadingCategoryId === c.id && (
+                  <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-10">
+                    <div className="flex flex-col items-center gap-3">
+                      <div className="w-12 h-12 border-4 border-pink-200 border-t-pink-500 rounded-full animate-spin"></div>
+                      <p className="text-pink-600 font-fredoka font-semibold">Loading...</p>
+                    </div>
+                  </div>
+                )}
+
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-[90%] bg-white/90 backdrop-blur-sm px-4 py-3 text-center rounded-2xl shadow-sm">
                   <div className="font-fredoka font-bold text-lg text-gray-800 group-hover:text-pink-600 transition-colors">{c.name}</div>
                 </div>
               </motion.div>
+            </Link>
           ))}
         </div>
       </div>
