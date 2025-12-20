@@ -21,7 +21,7 @@ import TopSellers from "@/app/components/TopSellers";
 import LgAdvertisements from "@/app/components/LgAdvertisements";
 import NewArrivals from "@/app/components/NewArrivals";
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60;
 
 export default async function Home() {
   const [featuredProducts, collections, categories, newArrivals, topSellingAndFeaturedProducts, products, smallAdvertisements, largeAdvertisements] =
@@ -31,7 +31,7 @@ export default async function Home() {
       getCategoriesWithCounts(),
       getNewArrivals(),
       getTopSellingAndFeaturedProducts(),
-      getProducts(),
+      getProducts(20),
       getSmallAdvertisements(),
       getLargeAdvertisements(),
     ]);
@@ -42,9 +42,9 @@ export default async function Home() {
       <Collections collections={collections} />
       <SmAdvertisements advertisements={smallAdvertisements} />
       <Categories categories={categories} />
-      <TopSellers products={[...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts]} title="Best Sellers"/>
+      <TopSellers products={[...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts]} title="Best Sellers" />
       <LgAdvertisements advertisements={largeAdvertisements} />
-      <TopSellers products={newArrivals}  title="New Arrivals"/>
+      <TopSellers products={newArrivals} title="New Arrivals" />
       <ProductsGridView title="All Products" products={products} />
       <CustomerReviews />
       {/* <Brands brands={brands} /> */}
