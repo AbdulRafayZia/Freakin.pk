@@ -3,11 +3,11 @@ const path = require("path");
 module.exports = {
   images: {
     domains: [
-    "xfe9abyycupdwfjo.public.blob.vercel-storage.com",
+      "xfe9abyycupdwfjo.public.blob.vercel-storage.com",
       "example.com", // Example: add more domains if needed
     ],
   },
-  swcMinify: false, // Disable SWC minification
+  swcMinify: true, // Enable SWC minification
   webpack: (config) => {
     config.experiments = {
       asyncWebAssembly: true,
