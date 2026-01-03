@@ -37,25 +37,7 @@ export default function ProductRail({ title = "Best Sellers", products = [] }) {
     };
   }, [updateArrows]);
 
-  useEffect(() => {
-    const el = wrapRef.current;
-    if (!el) return;
-    const isSmallScreen = () => window.innerWidth < 640;
-    const onWheel = (e) => {
-      if (!isSmallScreen()) {
-        if (!(Math.abs(e.deltaY) > Math.abs(e.deltaX)) || e.shiftKey) return;
-        const max = el.scrollWidth - el.clientWidth;
-        if (max <= 0) return; 
-        const atStart = el.scrollLeft <= 0;
-        const atEnd = el.scrollLeft >= max - 1;
-        if ((e.deltaY < 0 && atStart) || (e.deltaY > 0 && atEnd)) return;
-        el.scrollBy({ left: e.deltaY * 0.9, behavior: "smooth" });
-        e.preventDefault(); 
-      }
-    };
-    el.addEventListener("wheel", onWheel, { passive: false, capture: true });
-    return () => el.removeEventListener("wheel", onWheel, { capture: true });
-  }, []);
+
 
   const scrollByCards = (dir = 1) => {
     const el = wrapRef.current;
@@ -89,7 +71,7 @@ export default function ProductRail({ title = "Best Sellers", products = [] }) {
             ref={wrapRef}
             tabIndex={0}
             onKeyDown={(e) => {
-              if (window.innerWidth >= 640) { 
+              if (window.innerWidth >= 640) {
                 if (e.key === "ArrowRight") scrollByCards(1);
                 if (e.key === "ArrowLeft") scrollByCards(-1);
               }

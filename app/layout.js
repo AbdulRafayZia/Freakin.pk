@@ -18,6 +18,20 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+import { Fredoka, Quicksand } from "next/font/google";
+
+const fredoka = Fredoka({
+  subsets: ["latin"],
+  variable: "--font-fredoka",
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const quicksand = Quicksand({
+  subsets: ["latin"],
+  variable: "--font-quicksand",
+  weight: ["300", "400", "500", "600", "700"],
+});
+
 export const metadata = {
   title: "E Commerce Website",
   description: "Create By Docs Readers",
@@ -32,7 +46,7 @@ export default function RootLayout({ children }) {
         <meta name="description" content="Create By Docs Readers" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${fredoka.variable} ${quicksand.variable} antialiased`}
       >
         <Toaster />
         <NextUIProvider>

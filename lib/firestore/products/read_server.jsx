@@ -27,9 +27,9 @@ export const getFeaturedProducts = async () => {
   return list.docs.map((snap) => snap.data());
 };
 
-export const getProducts = async () => {
+export const getProducts = async (limitCount = 20) => {
   const list = await getDocs(
-    query(collection(db, "products"), orderBy("timestampCreate", "desc"))
+    query(collection(db, "products"), orderBy("timestampCreate", "desc"), limit(limitCount))
   );
   return list.docs.map((snap) => snap.data());
 };

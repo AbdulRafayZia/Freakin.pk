@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react';
 function useLocalStorage(key, initialValue) {
   // Initialize the state to the initial value or the value from localStorage
   const [storedValue, setStoredValue] = useState(() => {
+    if (typeof window === 'undefined') {
+      return initialValue;
+    }
     try {
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;

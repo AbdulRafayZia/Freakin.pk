@@ -27,7 +27,7 @@ export default function AboutUsPage() {
           {/* Logo */}
           <div className="flex items-center justify-center gap-3 mb-8">
             <Sparkles className="text-pink-500" size={50} />
-            <h1 className="font-fredoka text-6xl md:text-7xl font-bold text-pink-600 text-shadow-pop">
+            <h1 className="font-fredoka text-5xl md:text-7xl font-bold text-pink-600 text-shadow-pop">
               Freakin.pk
             </h1>
           </div>
@@ -36,16 +36,16 @@ export default function AboutUsPage() {
           <div className="inline-flex items-center gap-2 rounded-full border-2 border-pink-300 bg-white/80 backdrop-blur-sm px-5 py-2 mb-8 shadow-lg">
             <Award className="text-pink-500" size={20} />
             <span className="font-quicksand font-semibold text-gray-700">
-              Since 2025 — Your Trusted Shopping Partner
+              Spread Joy with Stickers & Unique Gifts
             </span>
           </div>
 
           {/* Main Heading */}
           <h2 className="font-fredoka text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-            Shopping Made Simple, Fun & Affordable
+            Sticking Fun Everywhere You Go!
           </h2>
           <p className="font-quicksand text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-10">
-            We're passionate about bringing you the best products with exceptional service, amazing prices, and a shopping experience you'll love.
+            Discover our collection of custom designs, quirky stickers, and thoughtful gifts that bring a smile to your face.
           </p>
 
           {/* CTA Buttons */}
@@ -78,16 +78,16 @@ export default function AboutUsPage() {
                 </h3>
               </div>
               <p className="font-quicksand text-gray-700 leading-relaxed mb-6">
-                At Freakin.pk, our mission is to make quality products accessible to everyone. We believe shopping should be easy, enjoyable, and affordable. That's why we carefully curate our collection, verify every product, and ensure you get the best value for your money.
+                At Freakin.pk, we believe that self-expression should be fun, colorful, and affordable. Our mission is to add a pop of personality to your everyday items with high-quality stickers and curated gifts that speak your vibe.
               </p>
 
               <div className="space-y-3">
-                <h4 className="font-quicksand font-bold text-gray-800 mb-3">What We Stand For:</h4>
+                <h4 className="font-quicksand font-bold text-gray-800 mb-3">Why Choose Us?</h4>
                 {[
-                  "Quality products at fair prices",
-                  "Honest product descriptions & reviews",
-                  "Fast shipping & reliable service",
-                  "Customer satisfaction first"
+                  "Premium vinyl stickers that last",
+                  "Unique designs you won't find anywhere else",
+                  "Gifts that make people say 'Wow!'",
+                  "Packed with extreme care and love"
                 ].map((item, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-pink-500 flex-shrink-0"></div>
@@ -100,15 +100,15 @@ export default function AboutUsPage() {
             {/* Right - Stats */}
             <div className="space-y-6">
               <div className="bg-gradient-to-br from-pink-500 to-purple-500 rounded-3xl shadow-xl p-8 text-white">
-                <h3 className="font-fredoka text-3xl font-bold mb-6">Our Impact</h3>
+                <h3 className="font-fredoka text-3xl font-bold mb-6">Our Creative Impact</h3>
                 <p className="font-quicksand mb-6">
-                  Here's how our amazing community has made a difference:
+                  Spreading happiness one sticker at a time:
                 </p>
                 <div className="grid grid-cols-2 gap-4">
-                  <StatCard value="50K+" label="Happy Customers" />
-                  <StatCard value="100K+" label="Products Sold" />
-                  <StatCard value="4.8★" label="Average Rating" />
-                  <StatCard value="99%" label="Satisfaction Rate" />
+                  <StatCard value="10K+" label="Happy Stickers" />
+                  <StatCard value="5K+" label="Gifts Delivered" />
+                  <StatCard value="4.9★" label="Sticker Quality" />
+                  <StatCard value="100%" label="Made with Love" />
                 </div>
               </div>
 
@@ -119,8 +119,8 @@ export default function AboutUsPage() {
                       <TrendingUp className="text-pink-600" size={24} />
                     </div>
                   </div>
-                  <div className="font-fredoka text-xl font-bold text-gray-800 mb-1">Growing Fast</div>
-                  <p className="font-quicksand text-sm text-gray-600">New products daily</p>
+                  <div className="font-fredoka text-xl font-bold text-gray-800 mb-1">Fresh Designs</div>
+                  <p className="font-quicksand text-sm text-gray-600">New drops weekly</p>
                 </div>
                 <div className="bg-white/90 backdrop-blur-xl rounded-2xl shadow-lg p-6 border border-pink-100 text-center">
                   <div className="flex justify-center mb-3">
@@ -128,8 +128,8 @@ export default function AboutUsPage() {
                       <Users className="text-purple-600" size={24} />
                     </div>
                   </div>
-                  <div className="font-fredoka text-xl font-bold text-gray-800 mb-1">Community</div>
-                  <p className="font-quicksand text-sm text-gray-600">Join thousands</p>
+                  <div className="font-fredoka text-xl font-bold text-gray-800 mb-1">Sticker Club</div>
+                  <p className="font-quicksand text-sm text-gray-600">Join the fun</p>
                 </div>
               </div>
             </div>
@@ -142,32 +142,32 @@ export default function AboutUsPage() {
         <div className="max-w-6xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <h3 className="font-fredoka text-4xl font-bold text-gray-800 mb-4">
-              How Freakin.pk Works
+              Get Your Sticker Fix
             </h3>
             <p className="font-quicksand text-lg text-gray-600">
-              Shopping with us is as easy as 1-2-3!
+              Adding personality to your world is easy!
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <StepCard
               number="1"
-              title="Browse & Discover"
-              description="Explore our carefully curated collection of amazing products across various categories."
+              title="Pick Your Favorites"
+              description="Browse our massive collection of stickers, decals, and cute gifts."
               icon={<ShoppingBag size={28} />}
               color="pink"
             />
             <StepCard
               number="2"
-              title="Safe & Secure Checkout"
-              description="Add to cart and checkout securely. We protect your information and ensure safe transactions."
+              title="We Pack with Love"
+              description="Your order is hand-picked and packed securely with extra cute touches."
               icon={<Package size={28} />}
               color="purple"
             />
             <StepCard
               number="3"
-              title="Fast Delivery"
-              description="Track your order and receive it quickly. Not satisfied? Easy returns within 7 days."
+              title="Unbox Happiness"
+              description="Receive your package, stick them everywhere, and show off your style!"
               icon={<TrendingUp size={28} />}
               color="blue"
             />
@@ -189,20 +189,20 @@ export default function AboutUsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <ValueCard
-              title="Customer First"
-              description="Your satisfaction is our top priority. We go above and beyond to ensure you have the best shopping experience."
+              title="Happiness Guaranteed"
+              description="We want you to love your stickers! If something isn't right, we'll fix it."
             />
             <ValueCard
-              title="Quality Assured"
-              description="Every product is carefully selected and verified to meet our high standards of quality."
+              title="Premium Quality"
+              description="Waterproof, scratch-resistant, and vibrant colors that don't fade."
             />
             <ValueCard
-              title="Transparent Pricing"
-              description="No hidden fees, no surprises. What you see is what you pay—fair and simple."
+              title="Creativity First"
+              description="We support artists and creators by bringing unique designs to life."
             />
             <ValueCard
-              title="Fast & Reliable"
-              description="From browsing to delivery, we ensure a smooth and speedy experience every time."
+              title="Express Yourself"
+              description="Our goal is to help you show the world who you are through fun designs."
             />
           </div>
         </div>
@@ -214,14 +214,14 @@ export default function AboutUsPage() {
           <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-10 md:p-14 border border-pink-100 text-center">
             <Sparkles className="text-pink-500 mx-auto mb-6" size={48} />
             <h3 className="font-fredoka text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-              Ready to Start Shopping?
+              Detailed Designs, Delightful Deals
             </h3>
             <p className="font-quicksand text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-              Join thousands of happy customers who trust Freakin.pk for their shopping needs. Discover amazing products today!
+              Ready to make your laptop, bottle, or journal look awesome?
             </p>
             <Link href="/">
               <button className="px-10 py-4 bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-quicksand font-bold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl text-lg">
-                Explore Our Catalog
+                Shop Stickers Now
               </button>
             </Link>
           </div>
