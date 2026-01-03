@@ -4,6 +4,7 @@ import {
   getProducts,
   getTopSellingAndFeaturedProducts,
 } from "@/lib/firestore/products/read_server";
+import { Suspense } from "react";
 import FeaturedProductSlider from "@/app/components/Sliders";
 import Collections from "@/app/components/Collections";
 import { getCollections } from "@/lib/firestore/collections/read_server";
@@ -45,7 +46,9 @@ export default async function Home() {
       <TopSellers products={[...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts]} title="Best Sellers" />
       <LgAdvertisements advertisements={largeAdvertisements} />
       <TopSellers products={newArrivals} title="New Arrivals" />
-      <ProductsGridView title="All Products" products={products} />
+      <Suspense fallback={<div>Loading Products...</div>}>
+        <ProductsGridView title="All Products" products={products} />
+      </Suspense>
       <CustomerReviews />
       {/* <Brands brands={brands} /> */}
     </>

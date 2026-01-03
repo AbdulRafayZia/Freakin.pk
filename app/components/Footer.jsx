@@ -83,9 +83,9 @@ export default function Footer() {
               Let's be friends
             </h3>
             <div className="flex justify-center space-x-4">
-              <SocialIcon url="https://facebook.com" bgColor="#fee2e2" fgColor="#ef4444" style={{ height: 40, width: 40 }} className="hover:scale-110 transition-transform" />
-              <SocialIcon url="https://instagram.com" bgColor="#fce7f3" fgColor="#db2777" style={{ height: 40, width: 40 }} className="hover:scale-110 transition-transform" />
-              <SocialIcon url="https://twitter.com" bgColor="#e0f2fe" fgColor="#0284c7" style={{ height: 40, width: 40 }} className="hover:scale-110 transition-transform" />
+              <SocialIcon url="https://facebook.com" aria-label="Facebook" bgColor="#fee2e2" fgColor="#ef4444" style={{ height: 40, width: 40 }} className="hover:scale-110 transition-transform" />
+              <SocialIcon url="https://instagram.com" aria-label="Instagram" bgColor="#fce7f3" fgColor="#db2777" style={{ height: 40, width: 40 }} className="hover:scale-110 transition-transform" />
+              <SocialIcon url="https://twitter.com" aria-label="Twitter" bgColor="#e0f2fe" fgColor="#0284c7" style={{ height: 40, width: 40 }} className="hover:scale-110 transition-transform" />
             </div>
             <div className="mt-8 text-xs text-gray-400 font-quicksand">
               &copy; 2026. All rights reserved. Made with ❤️
