@@ -11,7 +11,7 @@ export default function Intro({ product }) {
         <Category categoryId={product?.categoryId} />
         {/* <Brand brandId={product?.brandId} /> */}
       </div>
-      <h1 className="font-semibold text-xl md:text-2xl">{product?.title}</h1>
+      <h1 className="font-semibold text-xl md:text-2xl">{product?.title.toUpperCase()}</h1>
       <h3 className="text-green-500 font-bold text-lg">
         Rs {product?.salePrice}{" "}
         {/* {product?.price && !isNaN(product?.price) && (

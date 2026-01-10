@@ -63,12 +63,12 @@ export default function AddToCartButton({ productId, type, color, size, outOfSto
         onClick={handlClick}
         disabled={isLoading || outOfStock}
         className={`
-            relative group overflow-hidden px-6 py-3 rounded-xl font-fredoka font-bold tracking-wide text-sm md:text-base transition-all duration-300
+            w-full py-3.5 px-6 rounded-full font-bold text-lg transition-all duration-300 shadow-md transform hover:-translate-y-1 active:scale-95 flex items-center justify-center
             ${outOfStock
-            ? 'bg-gray-200 text-gray-400 cursor-not-allowed border-2 border-gray-200'
+            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
             : isAdded
-              ? 'bg-white border-2 border-red-400 text-red-500 hover:bg-red-50 shadow-sm'
-              : 'bg-gradient-to-b from-pink-400 to-pink-500 border-b-4 border-pink-700 text-white hover:-translate-y-1 hover:shadow-lg active:border-b-0 active:translate-y-1'
+              ? 'bg-red-50 border-2 border-red-200 text-red-500 hover:bg-red-100'
+              : 'bg-[#ff3b8f] text-white hover:shadow-lg shadow-pink-200'
           }
             ${isLoading ? 'cursor-wait opacity-80' : ''}
         `}
@@ -78,18 +78,19 @@ export default function AddToCartButton({ productId, type, color, size, outOfSto
             <Loader2 className="animate-spin" size={20} />
           ) : isAdded ? (
             <>
-              <Trash2 size={18} />
+              <Trash2 size={20} />
               <span>Remove</span>
             </>
           ) : (
             <>
-              <ShoppingBag size={18} strokeWidth={2.5} />
+              <ShoppingBag size={20} strokeWidth={2.5} />
               <span>{outOfStock ? "Out of Stock" : "Add To Cart"}</span>
             </>
           )}
         </div>
       </button>
     );
+
   }
 
   // ---------------------------------------------------------------------------

@@ -46,23 +46,23 @@ export default function Purchase({ product }) {
   const isOutOfStock = product?.stock <= (product?.orders ?? 0);
 
   return (
-    <div className="p-5">
+    <div className="flex flex-col gap-6 p-1">
       {/* Color selection */}
       {colors?.length > 0 && (
-        <div className="flex flex-col gap-2 mb-6">
-          <h4 className="font-semibold text-sm text-gray-700">Select Color:</h4>
-          <div className="flex gap-4 flex-wrap">
+        <div className="flex flex-col gap-3">
+          <h4 className="font-semibold text-gray-800">Select Color:</h4>
+          <div className="flex gap-3 flex-wrap">
             {colors.map((color, index) => (
-              <div
+              <button
                 key={index}
-                className={`w-12 h-12 rounded-full cursor-pointer transition-transform duration-300 ${
-                  color === selectedColor ? "transform scale-110 border-2 border-gray-800" : "border"
-                }`}
-                style={{
-                  backgroundColor: color,
-                  boxShadow: color === selectedColor ? "0px 0px 8px rgba(0, 0, 0, 0.15)" : "none",
-                }}
+                type="button"
+                className={`w-10 h-10 rounded-full border-2 transition-all duration-200 ${color === selectedColor
+                  ? "border-pink-500 ring-2 ring-pink-200 scale-110"
+                  : "border-gray-200 hover:border-gray-300"
+                  }`}
+                style={{ backgroundColor: color }}
                 onClick={() => setSelectedColor(color)}
+                aria-label={`Select color ${color}`}
               />
             ))}
           </div>
@@ -71,28 +71,28 @@ export default function Purchase({ product }) {
 
       {/* Size selection */}
       {sizes?.length > 0 && (
-        <div className="flex flex-col gap-2 mb-6">
-          <h4 className="font-semibold text-sm text-gray-700">Select Size:</h4>
-          <div className="flex gap-4 flex-wrap">
+        <div className="flex flex-col gap-3">
+          <h4 className="font-semibold text-gray-800">Select Size:</h4>
+          <div className="flex gap-3 flex-wrap">
             {sizes.map((size, index) => (
-              <span
+              <button
                 key={index}
-                className={`px-4 py-2 rounded-lg cursor-pointer transition-colors duration-300 ${
-                  size === selectedSize
-                    ? "bg-gray-800 text-white border-2 border-gray-800"
-                    : "bg-gray-100 text-gray-700"
-                }`}
+                type="button"
+                className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 border ${size === selectedSize
+                  ? "bg-black text-white border-black shadow-md transform -translate-y-0.5"
+                  : "bg-white text-gray-700 border-gray-200 hover:border-gray-300 hover:bg-gray-50"
+                  }`}
                 onClick={() => setSelectedSize(size)}
               >
                 {size}
-              </span>
+              </button>
             ))}
           </div>
         </div>
       )}
 
       {/* Buttons */}
-      <div className="flex gap-6 items-center">
+      <div className="flex gap-3 items-center w-full mt-2">
         <button
           onClick={(e) => {
             e.stopPropagation();
@@ -104,42 +104,43 @@ export default function Purchase({ product }) {
             };
             localStorage.setItem("orderDetails", JSON.stringify(orderDetails));
 
-            // Build query string only if color/size is set
             let query = `/checkout?type=buynow&productId=${product?.id}`;
-            if (selectedColor) {
-              query += `&color=${selectedColor}`;
-            }
-            if (selectedSize) {
-              query += `&size=${selectedSize}`;
-            }
+            if (selectedColor) query += `&color=${selectedColor}`;
+            if (selectedSize) query += `&size=${selectedSize}`;
             router.push(query);
           }}
-          className={`w-full md:w-40 p-4 rounded-lg text-medium transition-colors duration-300 ${
-            isOutOfStock ? "bg-gray-400 cursor-not-allowed" : "bg-black text-white hover:bg-gray-800"
-          }`}
+          className={`flex-1 py-3.5 px-6 rounded-full text-lg font-bold shadow-lg transition-all duration-300 transform hover:-translate-y-1 ${isOutOfStock
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed shadow-none"
+              : "bg-gradient-to-r from-pink-500 to-violet-600 text-white hover:shadow-pink-500/30"
+            }`}
           disabled={isOutOfStock}
         >
-          Buy Now
+          {isOutOfStock ? "Out of Stock" : "Buy Now"}
         </button>
 
-        {/* Add to Cart Button */}
-    
-
+        <div className="flex-1">
           <AuthContextProvider>
-            <AddToCartButton type={"cute"} productId={product?.id} color={selectedColor} size={selectedSize} outOfStock={isOutOfStock} />
+            <AddToCartButton
+              type={"large"}
+              productId={product?.id}
+              color={selectedColor}
+              size={selectedSize}
+              outOfStock={isOutOfStock}
+            />
           </AuthContextProvider>
-        
+        </div>
 
-        {/* Favorite Button */}
-        <AuthContextProvider>
-          <FavoriteButton productId={product?.id} />
-        </AuthContextProvider>
+        <div>
+          <AuthContextProvider>
+            <FavoriteButton productId={product?.id} />
+          </AuthContextProvider>
+        </div>
       </div>
 
       {/* Out of Stock message */}
       {isOutOfStock && (
-        <div className="mt-3 text-center py-3 bg-red-100 text-red-600 rounded-lg">
-          <h3 className="text-sm font-semibold">Out Of Stock</h3>
+        <div className="p-4 bg-red-50 text-red-600 rounded-xl border border-red-100 text-center font-medium">
+          Currently unavailable. Please check back later.
         </div>
       )}
     </div>

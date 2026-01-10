@@ -81,7 +81,7 @@ export default function Header() {
           <div className="h-16 md:h-20 flex items-center justify-between relative">
             {/* Left: Brand */}
             <Link href="/" className="flex items-center gap-2 group">
-              <img className="h-6 md:h-8" src="/logos/logo.svg" alt="Freakin.pk" />
+              <span className="font-fredoka text-base sm:text-lg md:text-3xl font-bold text-pink-500">Freakin.pk</span>
             </Link>
 
             {/* Center: Nav (Desktop) */}

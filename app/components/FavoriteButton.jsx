@@ -19,8 +19,8 @@ export default function FavoriteButton({ productId }) {
   const router = useRouter();
 
   const isLiked = user
-  ? data?.favorites?.includes(productId)
-  : favorites.includes(productId);
+    ? data?.favorites?.includes(productId)
+    : favorites.includes(productId);
 
   const handlClick = async () => {
     setIsLoading(true);
@@ -50,18 +50,27 @@ export default function FavoriteButton({ productId }) {
   };
 
   return (
-    <Button
-      isLoading={isLoading}
-      isDisabled={isLoading}
+    <button
       onClick={handlClick}
-      variant="light"
-      color="danger"
-      className="rounded-full"
-      isIconOnly
-      size="sm"
+      disabled={isLoading}
+      className={`
+        w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 border
+        ${isLiked
+          ? "bg-pink-50 border-pink-500 text-pink-500 shadow-md transform scale-105"
+          : "bg-white border-gray-200 text-gray-400 hover:text-pink-400 hover:border-pink-200 hover:shadow-lg"
+        }
+        ${isLoading ? "opacity-70 cursor-wait" : ""}
+      `}
+      title={isLiked ? "Remove from favorites" : "Add to favorites"}
     >
-      {!isLiked && <FavoriteBorderOutlinedIcon fontSize="small" />}
-      {isLiked && <FavoriteIcon fontSize="small" />}
-    </Button>
+      {isLoading ? (
+        <span className="w-5 h-5 border-2 border-pink-500 border-t-transparent rounded-full animate-spin" />
+      ) : (
+        <>
+          {!isLiked && <FavoriteBorderOutlinedIcon />}
+          {isLiked && <FavoriteIcon />}
+        </>
+      )}
+    </button>
   );
 }
