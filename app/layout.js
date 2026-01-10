@@ -33,7 +33,7 @@ const quicksand = Quicksand({
 });
 
 export const metadata = {
-  title: "E Commerce Website",
+  title: "Freakin.pk",
   description: "Create By Docs Readers",
 };
 

@@ -127,7 +127,7 @@ export default function FeaturedProductSlider({ featuredProducts = [] }) {
                     {/* Tag / Kicker */}
                     <motion.div variants={itemVariants} className="mb-4">
                         <span className="inline-block px-4 py-1 rounded-full border border-pink-300/50 bg-pink-500/20 backdrop-blur-md text-pink-100 text-sm font-bold tracking-widest uppercase font-quicksand">
-                            New Collection
+                            Freakin
                         </span>
                     </motion.div>
 
