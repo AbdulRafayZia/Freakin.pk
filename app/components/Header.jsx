@@ -19,6 +19,7 @@ import LogoutButton from "./LogoutButton";
 import UserDeatilsInMenu from "./UserDeatilsInMenu";
 import LoginButton from "./LoginButton";
 import AccountButton from "./AccountButton";
+import MegaMenu from "./MegaMenu";
 
 export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -35,7 +36,7 @@ export default function Header() {
 
   const menuList = [
     { name: "Home", link: "/", icon: <Home size={18} />, onNavbar: true },
-    { name: "Categories", link: "/categories", icon: <LayoutGrid size={18} />, onNavbar: true },
+    { name: "Categories", link: "/categories", icon: <LayoutGrid size={18} />, onNavbar: false },
     { name: "Search", link: "/search?q=", icon: <Search size={18} />, onNavbar: false },
     { name: "Favorites", link: "/favorites", icon: <HeartIcon size={18} />, onNavbar: false },
     { name: "About", link: "/about-us", icon: <Info size={18} />, onNavbar: true },
@@ -77,14 +78,14 @@ export default function Header() {
         ].join(" ")}
       >
         <div className="mx-auto max-w-7xl px-3 sm:px-4 md:px-6 w-full">
-          <div className="h-16 md:h-20 flex items-center justify-between">
+          <div className="h-16 md:h-20 flex items-center justify-between relative">
             {/* Left: Brand */}
             <Link href="/" className="flex items-center gap-2 group">
               <img className="h-6 md:h-8" src="/logos/logo.svg" alt="Freakin.pk" />
             </Link>
 
             {/* Center: Nav (Desktop) */}
-            <div className="hidden md:flex items-center bg-white/50 rounded-full px-4 py-1 border border-pink-100 backdrop-blur-sm">
+            <div className="hidden md:flex items-center gap-6 absolute left-1/2 -translate-x-1/2">
               {menuList.filter(m => m.onNavbar).map((item) => (
                 <NavLink key={item.name} item={item} />
               ))}
@@ -149,9 +150,13 @@ export default function Header() {
               </button>
             </div>
           </div>
+
+          {/* Bottom Row: Mega Menu (Desktop) */}
+          <div className="hidden md:flex justify-center pb-4">
+            <MegaMenu />
+          </div>
         </div>
       </nav>
-
       {/* Mobile Sheet - Full Page Overlay */}
       {isDropdownOpen && (
         <div className="md:hidden fixed inset-0 z-[100] flex">

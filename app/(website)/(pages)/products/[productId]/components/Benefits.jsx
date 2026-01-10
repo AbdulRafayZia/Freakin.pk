@@ -18,9 +18,9 @@ export default function Benefits() {
           alt="Warranty"
           className="h-12 aspect-square"
         /> */}
-        <span>
+        {/* <span>
           <b>Warranty:</b> <br />6 Months
-        </span>
+        </span> */}
       </div>
       <div className="flex items-center gap-2 lg:border-l-3 py-2 pl-4">
         {/* <img

@@ -41,10 +41,10 @@ export default async function Home() {
     <>
       <FeaturedProductSlider featuredProducts={featuredProducts} />
       <Collections collections={collections} />
-      <SmAdvertisements advertisements={smallAdvertisements} />
+      {smallAdvertisements?.length > 0 && <SmAdvertisements advertisements={smallAdvertisements} />}
       {/* <Categories categories={categories} /> */}
       {/* <TopSellers products={[...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts]} title="Best Sellers" /> */}
-      <LgAdvertisements advertisements={largeAdvertisements} />
+      {largeAdvertisements?.length > 0 && <LgAdvertisements advertisements={largeAdvertisements} />}
       <TopSellers products={newArrivals} title="New Arrivals" />
       <Suspense fallback={<div>Loading Products...</div>}>
         <ProductsGridView title="All Products" products={products} />

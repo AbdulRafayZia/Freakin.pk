@@ -36,22 +36,22 @@ export default async function Page({ params }) {
 
   return (
     <main className="p-5 md:p-10">
-      <section className="flex flex-col lg:flex-row gap-3">
-        <Photos
-          imageList={[product?.featureImageURL, ...(product?.imageList ?? [])]}
-        />
-      </section>
-      <section>
-        {" "}
-        <Intro product={product} />
-        <Benefits />
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="w-full">
+          <Photos
+            imageList={[product?.featureImageURL, ...(product?.imageList ?? [])]}
+          />
+        </div>
+        <div className="w-full">
+          <Intro product={product} />
+        </div>
       </section>
 
-      <div className="my-10">
+      {/* <div className="my-10">
         <ImageGallery
           images={[product?.featureImageURL, ...(product?.imageList ?? [])]}
         />
-      </div>
+      </div> */}
 
       <div className="flex justify-center py-4 lg:py-10">
         <Details product={product} />

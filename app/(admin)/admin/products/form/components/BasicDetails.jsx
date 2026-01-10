@@ -120,7 +120,7 @@ export default function BasicDetails({ data, handleData }) {
 
       <div className="flex flex-col gap-1">
         <label className="text-gray-500 text-xs" htmlFor="product-price">
-          Price <span className="text-red-500">*</span>{" "}
+          Price
         </label>
         <input
           type="number"
@@ -132,13 +132,12 @@ export default function BasicDetails({ data, handleData }) {
             handleData("price", e.target.valueAsNumber);
           }}
           className="border px-4 py-2 rounded-lg w-full outline-none"
-          required
         />
       </div>
 
       <div className="flex flex-col gap-1">
         <label className="text-gray-500 text-xs" htmlFor="product-sale-price">
-          Sale Price
+          Sale Price <span className="text-red-500">*</span>{" "}
         </label>
         <input
           type="number"
@@ -150,6 +149,7 @@ export default function BasicDetails({ data, handleData }) {
             handleData("salePrice", e.target.valueAsNumber);
           }}
           className="border px-4 py-2 rounded-lg w-full outline-none"
+          required
         />
       </div>
 

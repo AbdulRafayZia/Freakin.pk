@@ -74,7 +74,7 @@ export default function Page() {
           {/* Logo */}
           <div className="flex items-center gap-3 mb-8">
             <Sparkles className="text-pink-500" size={40} />
-            <h1 className="font-fredoka text-6xl font-bold text-pink-600 text-shadow-pop">
+            <h1 className="font-fredoka text-6xl font-bold text-pink-600">
               Freakin.pk
             </h1>
           </div>
@@ -111,7 +111,7 @@ export default function Page() {
           <div className="flex lg:hidden justify-center mb-8">
             <div className="flex items-center gap-2">
               <Sparkles className="text-pink-500" size={32} />
-              <h1 className="font-fredoka text-4xl font-bold text-pink-600 text-shadow-pop">
+              <h1 className="font-fredoka text-4xl font-bold text-pink-600 ">
                 Freakin.pk
               </h1>
             </div>

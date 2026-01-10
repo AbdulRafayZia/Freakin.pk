@@ -11,19 +11,21 @@ export default function Intro({ product }) {
         <Category categoryId={product?.categoryId} />
         {/* <Brand brandId={product?.brandId} /> */}
       </div>
-      <h1 className="font-semibold text-xl md:text-4xl">{product?.title}</h1>
+      <h1 className="font-semibold text-xl md:text-2xl">{product?.title}</h1>
       <h3 className="text-green-500 font-bold text-lg">
         Rs {product?.salePrice}{" "}
-        <span className="line-through text-gray-700 text-sm">
-          Rs {product?.price}
-        </span>
+        {/* {product?.price && !isNaN(product?.price) && (
+          <span className="line-through text-gray-700 text-sm">
+            Rs {product?.price}
+          </span>
+        )} */}
       </h3>
       <h2 className="text-gray-600 text-sm line-clamp-3 md:line-clamp-4">
         {product?.shortDescription}
       </h2>
 
       <Suspense fallback="">
-      <RatingReview product={product} />
+        <RatingReview product={product} />
       </Suspense>
 
       <Purchase product={product} />

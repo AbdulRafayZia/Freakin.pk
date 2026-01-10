@@ -69,7 +69,7 @@ export default function ContactUsPage() {
           {/* Logo */}
           <div className="flex items-center justify-center gap-3 mb-6">
             <Sparkles className="text-pink-500" size={40} />
-            <h1 className="font-fredoka text-5xl md:text-6xl font-bold text-pink-600 text-shadow-pop">
+            <h1 className="font-fredoka text-5xl md:text-6xl font-bold text-pink-600">
               Freakin.pk
             </h1>
           </div>

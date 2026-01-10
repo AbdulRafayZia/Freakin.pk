@@ -21,10 +21,6 @@ const resolveMedia = (url) => {
 
 export default function Photos({ imageList = [] }) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const [opacity, setOpacity] = useState(0);
-  const [offset, setOffset] = useState({ left: 0, top: 0 });
-  const sourceRef = useRef(null);
-  const targetRef = useRef(null);
   const containerRef = useRef(null);
   const videoRefs = useRef({}); // {idx: HTMLVideoElement}
 
@@ -42,22 +38,7 @@ export default function Photos({ imageList = [] }) {
     );
   };
 
-  const handleMouseEnter = () => setOpacity(1);
-  const handleMouseLeave = () => setOpacity(0);
 
-  const handleMouseMove = (e) => {
-    if (!targetRef.current || !sourceRef.current || !containerRef.current) return;
-    const targetRect = targetRef.current.getBoundingClientRect();
-    const sourceRect = sourceRef.current.getBoundingClientRect();
-    const containerRect = containerRef.current.getBoundingClientRect();
-    const xRatio = (targetRect.width - containerRect.width) / sourceRect.width;
-    const yRatio = (targetRect.height - containerRect.height) / sourceRect.height;
-
-    const left = Math.max(Math.min(e.clientX - sourceRect.left, sourceRect.width), 0);
-    const top  = Math.max(Math.min(e.clientY - sourceRect.top , sourceRect.height), 0);
-
-    setOffset({ left: left * -xRatio, top: top * -yRatio });
-  };
 
   const selectedItem = imageList[selectedImageIndex];
   const selectedMedia = resolveMedia(selectedItem);
@@ -69,7 +50,7 @@ export default function Photos({ imageList = [] }) {
       const ref = videoRefs.current[idx];
       if (!ref) return;
       if (idx === selectedImageIndex) {
-        ref.play?.().catch(() => {});
+        ref.play?.().catch(() => { });
       } else {
         ref.pause?.();
         ref.currentTime = 0;
@@ -80,7 +61,7 @@ export default function Photos({ imageList = [] }) {
   // Autoplay the first video on mount if it's a video
   useEffect(() => {
     if (selectedMedia.type === "video") {
-      videoRefs.current[selectedImageIndex]?.play?.().catch(() => {});
+      videoRefs.current[selectedImageIndex]?.play?.().catch(() => { });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageList]);
@@ -102,9 +83,6 @@ export default function Photos({ imageList = [] }) {
         <div
           ref={containerRef}
           className="flex justify-center w-full relative items-center overflow-hidden rounded-lg"
-          onMouseEnter={selectedMedia.type === "video" ? undefined : handleMouseEnter}
-          onMouseLeave={selectedMedia.type === "video" ? undefined : handleMouseLeave}
-          onMouseMove={selectedMedia.type === "video" ? undefined : handleMouseMove}
           // Keyboard support for left/right on the main media
           tabIndex={0}
           onKeyDown={(e) => {
@@ -128,48 +106,15 @@ export default function Photos({ imageList = [] }) {
           ) : (
             <>
               <div
-                ref={sourceRef}
-                className="object-cover h-[350px] md:h-[430px] w-auto max-w-full relative"
-                style={{ width: "auto", height: "auto" }}
+                className="w-full h-[350px] md:h-[500px] relative bg-white rounded-xl overflow-hidden border border-gray-100 flex items-center justify-center"
               >
                 <Image
                   src={selectedMedia.url}
                   alt="Product media"
-                  fill={false}
-                  width={600}
-                  height={430}
-                  className="object-cover h-[350px] md:h-[430px] w-auto max-w-full"
-                  style={{ width: "auto", height: "auto" }}
+                  fill
+                  className="object-contain p-2"
                   sizes="(max-width: 768px) 100vw, 600px"
                   priority
-                />
-              </div>
-              {/* zoomed overlay */}
-              <div
-                ref={targetRef}
-                className="absolute inset-0 w-auto h-auto max-w-none max-h-none transition-opacity duration-300 ease-in-out bg-white pointer-events-none"
-                style={{
-                  opacity: opacity,
-                  left: `${offset.left}px`,
-                  top: `${offset.top}px`,
-                  width: "200%",
-                  height: "200%",
-                }}
-              >
-                <Image
-                  src={selectedMedia.url}
-                  alt=""
-                  fill={false}
-                  width={1200}
-                  height={860}
-                  className="w-auto h-auto object-cover max-w-none max-h-none"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                  }}
-                  sizes="(max-width: 768px) 100vw, 1200px"
-                  priority
-                  draggable={false}
                 />
               </div>
             </>

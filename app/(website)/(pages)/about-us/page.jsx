@@ -27,7 +27,7 @@ export default function AboutUsPage() {
           {/* Logo */}
           <div className="flex items-center justify-center gap-3 mb-8">
             <Sparkles className="text-pink-500" size={50} />
-            <h1 className="font-fredoka text-5xl md:text-7xl font-bold text-pink-600 text-shadow-pop">
+            <h1 className="font-fredoka text-5xl md:text-7xl font-bold text-pink-600">
               Freakin.pk
             </h1>
           </div>
