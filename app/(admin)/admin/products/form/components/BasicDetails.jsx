@@ -20,7 +20,6 @@ export default function BasicDetails({ data, handleData }) {
           id="product-title"
           name="product-title"
           value={data?.title ?? ""}
-          minLength={30} // Ensures at least 100 characters
           onChange={(e) => {
             handleData("title", e.target.value);
           }}
@@ -52,7 +51,7 @@ export default function BasicDetails({ data, handleData }) {
 
       <div className="flex flex-col gap-1">
         <label className="text-gray-500 text-xs" htmlFor="product-brand">
-          Brand <span className="text-red-500">*</span>{" "}
+          Brand
         </label>
         <select
           type="text"
@@ -63,7 +62,6 @@ export default function BasicDetails({ data, handleData }) {
             handleData("brandId", e.target.value);
           }}
           className="border px-4 py-2 rounded-lg w-full outline-none"
-          required
         >
           <option value="">Select Brand</option>
           {brands?.map((item) => {
@@ -140,7 +138,7 @@ export default function BasicDetails({ data, handleData }) {
 
       <div className="flex flex-col gap-1">
         <label className="text-gray-500 text-xs" htmlFor="product-sale-price">
-          Sale Price <span className="text-red-500">*</span>{" "}
+          Sale Price
         </label>
         <input
           type="number"
@@ -152,7 +150,6 @@ export default function BasicDetails({ data, handleData }) {
             handleData("salePrice", e.target.valueAsNumber);
           }}
           className="border px-4 py-2 rounded-lg w-full outline-none"
-          required
         />
       </div>
 
@@ -161,7 +158,7 @@ export default function BasicDetails({ data, handleData }) {
           className="text-gray-500 text-xs"
           htmlFor="product-is-featured-product"
         >
-          Is Featured Product <span className="text-red-500">*</span>{" "}
+          Is Featured Product
         </label>
         <select
           type="number"
@@ -173,7 +170,6 @@ export default function BasicDetails({ data, handleData }) {
             handleData("isFeatured", e.target.value === "yes" ? true : false);
           }}
           className="border px-4 py-2 rounded-lg w-full outline-none"
-          required
         >
           <option value={"no"}>No</option>
           <option value={"yes"}>Yes</option>

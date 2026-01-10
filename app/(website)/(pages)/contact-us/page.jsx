@@ -34,7 +34,7 @@ export default function ContactUsPage() {
     const body = `Name: ${name}\nEmail: ${email}\nMessage: ${message}`;
 
     // Use window.open to avoid history replacement
-    const mailto = `mailto:hello@thirifign.com?subject=${encodeURIComponent(
+    const mailto = `mailto:freakin.pk28@gmail.com?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
 
@@ -108,10 +108,10 @@ export default function ContactUsPage() {
                     <div>
                       <h4 className="font-quicksand font-bold text-gray-800 mb-1">Email Us</h4>
                       <a
-                        href="mailto:hello@thirifign.com"
+                        href="mailto:freakin.pk28@gmail.com"
                         className="font-quicksand text-pink-600 hover:text-pink-700 transition-colors"
                       >
-                        hello@thirifign.com
+                        freakin.pk28@gmail.com
                       </a>
                     </div>
                   </div>
@@ -127,7 +127,7 @@ export default function ContactUsPage() {
                         href="tel:+923001234567"
                         className="font-quicksand text-purple-600 hover:text-purple-700 transition-colors"
                       >
-                        +92 300 1234567
+                        +92 315 5583796
                       </a>
                     </div>
                   </div>
@@ -140,7 +140,7 @@ export default function ContactUsPage() {
                     <div>
                       <h4 className="font-quicksand font-bold text-gray-800 mb-1">Visit Us</h4>
                       <p className="font-quicksand text-gray-600">
-                        Thirifign Studio<br />
+                        Freakin.pk<br />
                         Wah Cantt, Islamabad<br />
                         Pakistan
                       </p>

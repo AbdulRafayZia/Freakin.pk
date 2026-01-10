@@ -97,7 +97,7 @@ export default function Sidebar() {
               toast.error(error?.message);
             }
           }}
-          className="flex gap-2 items-center px-3 py-2 hover:bg-indigo-100 rounded-xl w-full justify-center ease-soft-spring duration-400 transition-all"
+          className="flex gap-2 items-center px-3 py-2 hover:bg-pink-100 rounded-xl w-full justify-center ease-soft-spring duration-400 transition-all"
         >
           <LogOut className="h-5 w-5" /> Logout
         </button>
@@ -113,7 +113,7 @@ function Tab({ item }) {
     <Link href={item?.link}>
       <li
         className={`flex items-center gap-2 px-4 py-2 rounded-xl font-semibold ease-soft-spring transition-all duration-300
-        ${isSelected ? "bg-[#879fff] text-white" : "bg-white text-black"} 
+        ${isSelected ? "bg-pink-500 text-white shadow-soft" : "bg-white text-black hover:bg-pink-100"} 
         `}
       >
         {item?.icon} {item?.name}

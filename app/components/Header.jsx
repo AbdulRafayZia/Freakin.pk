@@ -67,90 +67,90 @@ export default function Header() {
 
   return (
     <>
-    <nav
-      className={[
-        "sticky top-0 z-50",
-        "transition-all duration-300",
-        scrolled
-          ? "bg-white/80 backdrop-blur-xl border-b-4 border-pink-200 shadow-sm"
-          : "bg-white/40 backdrop-blur-md border-b-4 border-transparent",
-      ].join(" ")}
-    >
-      <div className="mx-auto max-w-7xl px-3 sm:px-4 md:px-6 w-full">
-        <div className="h-16 md:h-20 flex items-center justify-between">
-          {/* Left: Brand */}
-          <Link href="/" className="flex items-center gap-2 group">
-             <span className="font-fredoka text-base sm:text-lg md:text-3xl font-bold text-pink-500 text-shadow-pop">Freakin.pk</span>
-          </Link>
+      <nav
+        className={[
+          "sticky top-0 z-50",
+          "transition-all duration-300",
+          scrolled
+            ? "bg-white/80 backdrop-blur-xl border-b-4 border-pink-200 shadow-sm"
+            : "bg-white/40 backdrop-blur-md border-b-4 border-transparent",
+        ].join(" ")}
+      >
+        <div className="mx-auto max-w-7xl px-3 sm:px-4 md:px-6 w-full">
+          <div className="h-16 md:h-20 flex items-center justify-between">
+            {/* Left: Brand */}
+            <Link href="/" className="flex items-center gap-2 group">
+              <img className="h-6 md:h-8" src="/logos/logo.svg" alt="Freakin.pk" />
+            </Link>
 
-          {/* Center: Nav (Desktop) */}
-          <div className="hidden md:flex items-center bg-white/50 rounded-full px-4 py-1 border border-pink-100 backdrop-blur-sm">
-            {menuList.filter(m => m.onNavbar).map((item) => (
-              <NavLink key={item.name} item={item} />
-            ))}
-          </div>
-
-          {/* Right: Utilities */}
-          <div className="hidden md:flex items-center gap-3">
-            {/* Admin Button (only for admins) */}
-            <AdminButton />
-
-            {/* Search */}
-            <div className="relative">
-              <button
-                title="Search Products"
-                onClick={() => setShowSearch((s) => !s)}
-                className="h-10 w-10 flex justify-center items-center rounded-full bg-pink-50 text-pink-500 hover:bg-pink-100 hover:scale-110 transition-all"
-              >
-                 <Search size={20} />
-              </button>
-              <div
-                className={[
-                  "absolute right-0 top-1/2 -translate-y-1/2",
-                  "transition-all duration-300 overflow-hidden z-50",
-                  showSearch ? "w-72 opacity-100 -right-12" : "w-0 opacity-0",
-                ].join(" ")}
-              >
-                <form action="/search" className="flex shadow-lg rounded-full">
-                  <input
-                    name="q"
-                    placeholder="Search cute things…"
-                    className="w-full h-10 pl-4 pr-10 rounded-full bg-white border-2 border-pink-200 focus:outline-none focus:ring-2 focus:ring-pink-300 text-sm font-quicksand placeholder-pink-300 text-pink-600"
-                  />
-                  <button className="absolute right-3 top-1/2 -translate-y-1/2 text-pink-400 hover:text-pink-600">
-                    <Search size={16} />
-                  </button>
-                </form>
-              </div>
+            {/* Center: Nav (Desktop) */}
+            <div className="hidden md:flex items-center bg-white/50 rounded-full px-4 py-1 border border-pink-100 backdrop-blur-sm">
+              {menuList.filter(m => m.onNavbar).map((item) => (
+                <NavLink key={item.name} item={item} />
+              ))}
             </div>
 
-            {/* Cart and Favorites */}
-            <HeaderClientButtons />
+            {/* Right: Utilities */}
+            <div className="hidden md:flex items-center gap-3">
+              {/* Admin Button (only for admins) */}
+              <AdminButton />
 
-            {/* Account Button (only when logged in) */}
-            <AccountButton />
+              {/* Search */}
+              <div className="relative">
+                <button
+                  title="Search Products"
+                  onClick={() => setShowSearch((s) => !s)}
+                  className="h-10 w-10 flex justify-center items-center rounded-full bg-pink-50 text-pink-500 hover:bg-pink-100 hover:scale-110 transition-all"
+                >
+                  <Search size={20} />
+                </button>
+                <div
+                  className={[
+                    "absolute right-0 top-1/2 -translate-y-1/2",
+                    "transition-all duration-300 overflow-hidden z-50",
+                    showSearch ? "w-72 opacity-100 -right-12" : "w-0 opacity-0",
+                  ].join(" ")}
+                >
+                  <form action="/search" className="flex shadow-lg rounded-full">
+                    <input
+                      name="q"
+                      placeholder="Search cute things…"
+                      className="w-full h-10 pl-4 pr-10 rounded-full bg-white border-2 border-pink-200 focus:outline-none focus:ring-2 focus:ring-pink-300 text-sm font-quicksand placeholder-pink-300 text-pink-600"
+                    />
+                    <button className="absolute right-3 top-1/2 -translate-y-1/2 text-pink-400 hover:text-pink-600">
+                      <Search size={16} />
+                    </button>
+                  </form>
+                </div>
+              </div>
 
-            {/* Login Button (only when not logged in) */}
-            <LoginButton />
+              {/* Cart and Favorites */}
+              <HeaderClientButtons />
 
-            {/* Logout Button (only when logged in) */}
-            <LogoutButton />
-          </div>
+              {/* Account Button (only when logged in) */}
+              <AccountButton />
 
-          {/* Mobile Right */}
-          <div className="flex md:hidden items-center gap-2">
-            <HeaderClientButtons forMobile />
-            <button
-              onClick={() => setIsDropdownOpen((s) => !s)}
-              className="h-10 w-10 flex justify-center items-center rounded-full bg-pink-500 text-white hover:bg-pink-600 active:scale-95 transition-transform shadow-lg"
-              aria-label="Toggle Menu"
-            >
-              {isDropdownOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
+              {/* Login Button (only when not logged in) */}
+              <LoginButton />
+
+              {/* Logout Button (only when logged in) */}
+              <LogoutButton />
+            </div>
+
+            {/* Mobile Right */}
+            <div className="flex md:hidden items-center gap-2">
+              <HeaderClientButtons forMobile />
+              <button
+                onClick={() => setIsDropdownOpen((s) => !s)}
+                className="h-10 w-10 flex justify-center items-center rounded-full bg-pink-500 text-white hover:bg-pink-600 active:scale-95 transition-transform shadow-lg"
+                aria-label="Toggle Menu"
+              >
+                {isDropdownOpen ? <X size={22} /> : <Menu size={22} />}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
 
       {/* Mobile Sheet - Full Page Overlay */}
       {isDropdownOpen && (
@@ -163,7 +163,7 @@ export default function Header() {
           <div className="relative ml-auto h-full w-[86vw] max-w-sm bg-white border-l-4 border-pink-200 shadow-2xl p-5 flex flex-col rounded-l-3xl overflow-y-auto">
             <div className="flex items-center justify-between mb-6 sticky top-0 z-10 bg-white pb-2">
               <Link href="/" onClick={() => setIsDropdownOpen(false)}>
-                <span className="font-fredoka text-base sm:text-lg md:text-3xl font-bold text-pink-500">Freakin.pk</span>
+                <img className="h-6 md:h-8" src="/logos/Horizontal.png" alt="Freakin.pk" />
               </Link>
               <button
                 onClick={() => setIsDropdownOpen(false)}

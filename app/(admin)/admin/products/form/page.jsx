@@ -70,84 +70,84 @@ function Sizes({ sizes, setSizes }) {
   );
 }
 
-function Colors({ colors, setColors }) {
-  const [newColor, setNewColor] = useState("#ffffff");
-  const [showPicker, setShowPicker] = useState(false);
+// function Colors({ colors, setColors }) {
+//   const [newColor, setNewColor] = useState("#ffffff");
+//   const [showPicker, setShowPicker] = useState(false);
 
-  const addColor = () => {
-    if (newColor && !colors.includes(newColor)) {
-      setColors([...colors, newColor]);
-      setNewColor("#ffffff");
-    }
-  };
+//   const addColor = () => {
+//     if (newColor && !colors.includes(newColor)) {
+//       setColors([...colors, newColor]);
+//       setNewColor("#ffffff");
+//     }
+//   };
 
-  const handleColorChange = (color) => {
-    setNewColor(color.hex);
-  };
+//   const handleColorChange = (color) => {
+//     setNewColor(color.hex);
+//   };
 
-  const removeColor = (colorToRemove) => {
-    setColors(colors.filter((color) => color !== colorToRemove));
-  };
+//   const removeColor = (colorToRemove) => {
+//     setColors(colors.filter((color) => color !== colorToRemove));
+//   };
 
-  return (
-    <section className="flex flex-col gap-3 bg-white border p-4 rounded-xl w-full relative">
-      <h1 className="font-semibold">Colors</h1>
-      <div className="flex items-center gap-2">
-        <input
-          type="text"
-          value={newColor}
-          onChange={(e) => setNewColor(e.target.value)}
-          placeholder="Add new color"
-          className="border px-4 py-2 rounded-lg w-[500px] outline-none"
-        />
-        <div className="relative">
-          <button
-            type="button"
-            onClick={() => setShowPicker((prev) => !prev)}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-          >
-            {showPicker ? "Close Picker" : "Open Picker"}
-          </button>
-        </div>
-        <button
-          type="button"
-          onClick={addColor}
-          className="bg-green-500 text-white px-4 py-2 rounded-lg"
-        >
-          Add Color
-        </button>
-      </div>
-      {/* Move the picker below the field, not absolutely positioned */}
-      {showPicker && (
-        <div className="mt-2">
-          <SketchPicker
-            color={newColor}
-            onChange={handleColorChange}
-            disableAlpha
-          />
-        </div>
-      )}
-      <ul className="flex flex-wrap gap-2 mt-2">
-        {colors.map((color, index) => (
-          <li
-            key={index}
-            className="border px-4 py-1 rounded-lg flex items-center"
-          >
-            <div style={{ background: color }} className="w-5 aspect-square mr-2"></div>
-            {color}
-            <button
-              type="button"
-              className="ml-2 text-red-500"
-              onClick={() => removeColor(color)}
-            >
-              <Trash2 />
-            </button>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
+//   return (
+//     <section className="flex flex-col gap-3 bg-white border p-4 rounded-xl w-full relative">
+//       <h1 className="font-semibold">Colors</h1>
+//       <div className="flex items-center gap-2">
+//         <input
+//           type="text"
+//           value={newColor}
+//           onChange={(e) => setNewColor(e.target.value)}
+//           placeholder="Add new color"
+//           className="border px-4 py-2 rounded-lg w-[500px] outline-none"
+//         />
+//         <div className="relative">
+//           <button
+//             type="button"
+//             onClick={() => setShowPicker((prev) => !prev)}
+//             className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+//           >
+//             {showPicker ? "Close Picker" : "Open Picker"}
+//           </button>
+//         </div>
+//         <button
+//           type="button"
+//           onClick={addColor}
+//           className="bg-green-500 text-white px-4 py-2 rounded-lg"
+//         >
+//           Add Color
+//         </button>
+//       </div>
+//       {/* Move the picker below the field, not absolutely positioned */}
+//       {showPicker && (
+//         <div className="mt-2">
+//           <SketchPicker
+//             color={newColor}
+//             onChange={handleColorChange}
+//             disableAlpha
+//           />
+//         </div>
+//       )}
+//       <ul className="flex flex-wrap gap-2 mt-2">
+//         {colors.map((color, index) => (
+//           <li
+//             key={index}
+//             className="border px-4 py-1 rounded-lg flex items-center"
+//           >
+//             <div style={{ background: color }} className="w-5 aspect-square mr-2"></div>
+//             {color}
+//             <button
+//               type="button"
+//               className="ml-2 text-red-500"
+//               onClick={() => removeColor(color)}
+//             >
+//               <Trash2 />
+//             </button>
+//           </li>
+//         ))}
+//       </ul>
+//     </section>
+//   );
+// }
 
 export default function Page() {
   const [data, setData] = useState(null);
@@ -281,7 +281,7 @@ export default function Page() {
       </div>
 
       <Sizes sizes={sizes} setSizes={setSizes} />
-      <Colors colors={colors} setColors={setColors} />
+      {/* <Colors colors={colors} setColors={setColors} /> */}
       <Variants
         sizes={sizes}
         setSizes={setSizes}

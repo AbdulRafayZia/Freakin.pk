@@ -42,8 +42,8 @@ export default async function Home() {
       <FeaturedProductSlider featuredProducts={featuredProducts} />
       <Collections collections={collections} />
       <SmAdvertisements advertisements={smallAdvertisements} />
-      <Categories categories={categories} />
-      <TopSellers products={[...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts]} title="Best Sellers" />
+      {/* <Categories categories={categories} /> */}
+      {/* <TopSellers products={[...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts, ...topSellingAndFeaturedProducts]} title="Best Sellers" /> */}
       <LgAdvertisements advertisements={largeAdvertisements} />
       <TopSellers products={newArrivals} title="New Arrivals" />
       <Suspense fallback={<div>Loading Products...</div>}>

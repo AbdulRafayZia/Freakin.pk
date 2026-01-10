@@ -62,7 +62,7 @@ export default function Footer() {
             <div className="flex-1 flex flex-col md:flex-row items-center justify-center md:justify-end gap-8">
               <div className="flex items-center gap-3 bg-blue-50 px-4 py-2 rounded-2xl text-blue-600">
                 <Phone size={18} />
-                <h2 className="text-sm font-bold font-quicksand">+92 3333333333</h2>
+                <h2 className="text-sm font-bold font-quicksand">+92 3155583796</h2>
               </div>
               <div className="flex items-center gap-3 bg-pink-50 px-4 py-2 rounded-2xl text-pink-600">
                 <Mail size={18} />
@@ -71,7 +71,7 @@ export default function Footer() {
               <div className="flex items-center gap-3 bg-green-50 px-4 py-2 rounded-2xl text-green-600">
                 <MapPin size={18} />
                 <h2 className="text-sm font-bold font-quicksand text-center">
-                  New City Phase 2, Taxila
+                  Wah Cantt, Pakistan
                 </h2>
               </div>
             </div>

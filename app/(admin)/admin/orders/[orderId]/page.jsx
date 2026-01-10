@@ -2,8 +2,13 @@
 
 import { useOrder } from "@/lib/firestore/orders/read";
 import { CircularProgress } from "@nextui-org/react";
+import { Download } from "lucide-react";
 import { useParams } from "next/navigation";
 import ChangeOrderStatus from "./components/ChangeStatus";
+
+const fileId = () => {
+  return Math.random().toString(36).substring(2, 9);
+};
 
 export default function Page() {
   const { orderId } = useParams();
@@ -53,11 +58,41 @@ export default function Page() {
             const size = product?.price_data?.product_data?.size;
             return (
               <div className="flex gap-2 items-center" key={idx}>
-                <img
-                  className="h-10 w-10 rounded-lg"
-                  src={product?.price_data?.product_data?.images?.[0]}
-                  alt="Product Image"
-                />
+                <div className="relative group">
+                  <img
+                    className="h-10 w-10 rounded-lg object-cover"
+                    src={product?.price_data?.product_data?.images?.[0]}
+                    alt="Product Image"
+                  />
+                  <button
+                    onClick={async () => {
+                      const imageUrl =
+                        product?.price_data?.product_data?.images?.[0];
+                      if (imageUrl) {
+                        try {
+                          const response = await fetch(imageUrl);
+                          const blob = await response.blob();
+                          const url = window.URL.createObjectURL(blob);
+                          const link = document.createElement("a");
+                          link.href = url;
+                          link.setAttribute(
+                            "download",
+                            `${product?.price_data?.product_data?.name}-${fileId()}.jpg`
+                          );
+                          document.body.appendChild(link);
+                          link.click();
+                          link.parentNode.removeChild(link);
+                        } catch (error) {
+                          console.error("Error downloading image:", error);
+                        }
+                      }
+                    }}
+                    className="absolute -top-2 -right-2 bg-white rounded-full p-1 shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+                    title="Download Image"
+                  >
+                    <Download size={14} className="text-gray-600" />
+                  </button>
+                </div>
                 <div>
                   <h1 className="">
                     {product?.price_data?.product_data?.name}

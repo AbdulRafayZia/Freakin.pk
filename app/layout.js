@@ -42,7 +42,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="icon" href="/logos/logo.svg" />
-        <title>E Commerce Website</title>
+        <title>Freakin.pk</title>
         <meta name="description" content="Create By Docs Readers" />
       </head>
       <body
